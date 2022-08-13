@@ -10,11 +10,9 @@ import com.example.myzhxy.service.TeacherService;
 import com.example.myzhxy.util.CreateVerifiCodeImage;
 import com.example.myzhxy.util.JwtHelper;
 import com.example.myzhxy.util.Result;
+import com.example.myzhxy.util.ResultCodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +57,7 @@ public class SystemController {
     }
 
     @PostMapping("/login")
-    public Result login(@RequestBody LoginForm loginForm, HttpServletRequest request) {
+    public Result<Object> login(@RequestBody LoginForm loginForm, HttpServletRequest request) {
         // verify code validate
         HttpSession session = request.getSession();
         String sessionVerificode = (String) session.getAttribute("verificode");
@@ -118,5 +116,37 @@ public class SystemController {
                 }
         }
         return Result.fail().message("user not exist");
+    }
+
+    @GetMapping("/getInfo")
+    public Result<Object> getInfoByToken(@RequestHeader("token") String token) {
+        boolean expiration = JwtHelper.isExpiration(token);
+        if(expiration){
+            return Result.build(null, ResultCodeEnum.TOKEN_ERROR);
+        }
+        Long userId = JwtHelper.getUserId(token);
+        Integer userType = JwtHelper.getUserType(token);
+        Map<String, Object> map = new LinkedHashMap<>();
+        if(userType == null){
+            return Result.build(null, ResultCodeEnum.ILLEGAL_REQUEST);
+        }
+        switch(userType){
+            case 1:
+                Admin admin = adminService.getAdminById(userId);
+                map.put("userType", 1);
+                map.put("user", admin);
+                break;
+            case 2:
+                Student student = studentService.getStudentById(userId);
+                map.put("userType", 2);
+                map.put("user", student);
+                break;
+            case 3:
+                Teacher teacher = teacherService.getTeacherById(userId);
+                map.put("userType", 3);
+                map.put("user", teacher);
+                break;
+        }
+        return Result.ok(map);
     }
 }
