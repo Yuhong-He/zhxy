@@ -55,7 +55,7 @@ public class Swagger2Config {
                 .select()
                 //可以测试请求头中：输入token
                 //.apis(RequestHandlerSelectors.withClassAnnotation(ApiOperation.class))
-                .apis(RequestHandlerSelectors.basePackage("com.atguigu.myzhxy.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.myzhxy.controller"))
                 //过滤掉admin路径下的所有页面
                 //.paths(Predicates.and(PathSelectors.regex("/sms/.*")))
                 //过滤掉所有error或error.*页面
