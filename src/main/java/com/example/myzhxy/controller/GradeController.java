@@ -31,6 +31,13 @@ public class GradeController {
         return Result.ok(pageRs);
     }
 
+    @ApiOperation("Get all grades")
+    @GetMapping("/getGrades")
+    public Result<Object> getGrades() {
+        List<Grade> list = gradeService.getAllGrades();
+        return Result.ok(list);
+    }
+
     @ApiOperation("Save grade")
     @PostMapping("/saveOrUpdateGrade")
     public Result<Object> saveOrUpdateGrade(@ApiParam("Grade body") @RequestBody Grade grade) {
