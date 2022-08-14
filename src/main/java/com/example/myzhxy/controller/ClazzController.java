@@ -31,6 +31,13 @@ public class ClazzController {
         return Result.ok(pageRs);
     }
 
+    @ApiOperation("Get all classes")
+    @GetMapping("/getClazzs")
+    public Result<Object> getClazzs() {
+        List<Clazz> list = clazzService.getAllGrades();
+        return Result.ok(list);
+    }
+
     @ApiOperation("Save class")
     @PostMapping("/saveOrUpdateClazz")
     public Result<Object> saveOrUpdateClazz(@ApiParam("Grade body") @RequestBody Clazz clazz) {

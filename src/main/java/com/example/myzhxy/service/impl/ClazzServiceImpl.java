@@ -6,11 +6,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.myzhxy.mapper.ClazzMapper;
 import com.example.myzhxy.pojo.Clazz;
-import com.example.myzhxy.pojo.Grade;
 import com.example.myzhxy.service.ClazzService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 @Service("clazzServiceImpl")
 @Transactional
@@ -28,5 +29,10 @@ public class ClazzServiceImpl extends ServiceImpl<ClazzMapper, Clazz> implements
         }
         queryWrapper.orderByDesc("id");
         return baseMapper.selectPage(pageParam, queryWrapper);
+    }
+
+    @Override
+    public List<Clazz> getAllGrades() {
+        return baseMapper.selectList(null);
     }
 }
