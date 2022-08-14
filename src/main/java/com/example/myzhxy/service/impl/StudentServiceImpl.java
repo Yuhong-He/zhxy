@@ -35,6 +35,10 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
     @Override
     public IPage<Student> getClazzByOpr(Page<Student> page, Student student) {
         QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
+        String clazzName = student.getClazzName();
+        if(!StringUtils.isEmpty(clazzName)){
+            queryWrapper.like("clazz_name", clazzName);
+        }
         String name = student.getName();
         if(!StringUtils.isEmpty(name)){
             queryWrapper.like("name", name);
