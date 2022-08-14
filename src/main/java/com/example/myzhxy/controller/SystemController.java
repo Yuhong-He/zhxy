@@ -11,17 +11,22 @@ import com.example.myzhxy.util.CreateVerifiCodeImage;
 import com.example.myzhxy.util.JwtHelper;
 import com.example.myzhxy.util.Result;
 import com.example.myzhxy.util.ResultCodeEnum;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/sms/system")
@@ -148,5 +153,29 @@ public class SystemController {
                 break;
         }
         return Result.ok(map);
+    }
+
+    @ApiOperation("File upload")
+    @PostMapping("/headerImgUpload")
+    public Result<Object> headerImageUpload(
+            @ApiParam("File need to upload") @RequestPart("multipartFile") MultipartFile multipartFile) {
+        String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+        String originalFilename = multipartFile.getOriginalFilename();
+        assert originalFilename != null;
+        int i = originalFilename.lastIndexOf(".");
+        String newFileName = uuid + originalFilename.substring(i);
+
+        // save file
+        String portraitPath = "/Users/yuhong/IdeaProjects/myzhxy/target/classes/public/upload/" + newFileName;
+        try {
+            multipartFile.transferTo(new File(portraitPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // response a image url
+        String path = "upload/".concat(newFileName);
+
+        return Result.ok(path);
     }
 }
