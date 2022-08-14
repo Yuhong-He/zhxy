@@ -33,7 +33,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
     }
 
     @Override
-    public IPage<Teacher> getClazzByOpr(Page<Teacher> page, Teacher teacher) {
+    public IPage<Teacher> getTeacherByOpr(Page<Teacher> page, Teacher teacher) {
         QueryWrapper<Teacher> queryWrapper = new QueryWrapper<>();
         String clazzName = teacher.getClazzName();
         if(!StringUtils.isEmpty(clazzName)){

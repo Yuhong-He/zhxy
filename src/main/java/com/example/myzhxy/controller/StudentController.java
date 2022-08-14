@@ -27,7 +27,7 @@ public class StudentController {
                                                @ApiParam("Page Size") @PathVariable("pageSize") Integer pageSize,
                                                @ApiParam("Student Name") Student student) {
         Page<Student> page = new Page<>(pageNo, pageSize);
-        IPage<Student> pageRs =  studentService.getClazzByOpr(page, student);
+        IPage<Student> pageRs =  studentService.getStudentByOpr(page, student);
         return Result.ok(pageRs);
     }
 
