@@ -13,8 +13,8 @@ This repo is the tutorial project of [Java毕设项目：智慧校园](https://w
 ## Run locally
 1. Run `git clone git@github.com:Theodore-Ho/zhxy.git` command in your directory
 2. Import/run the SQL starter `src/main/resources/sql/atguigu_zhxy_db.sql` in MySQL
-3. Open IDEA -> Open this project -> set the Java version to 8
-4. Set your MySQL username and password in file `src/main/resources/application.yml`
+3. Open IDEA -> Open this project -> Set the Java version to 8
+4. Set your MySQL url, username and password in file `src/main/resources/application.yml`
 5. Click Run and Explore it!!!
 
 ## Demo
