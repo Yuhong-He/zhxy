@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.myzhxy.mapper.StudentMapper;
-import com.example.myzhxy.pojo.Clazz;
+import com.example.myzhxy.pojo.Admin;
 import com.example.myzhxy.pojo.LoginForm;
 import com.example.myzhxy.pojo.Student;
 import com.example.myzhxy.service.StudentService;
@@ -45,5 +45,13 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
         }
         queryWrapper.orderByDesc("id");
         return baseMapper.selectPage(page, queryWrapper);
+    }
+
+    @Override
+    public Student verifyPassword(Long userId, String password) {
+        QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", userId.intValue());
+        queryWrapper.eq("password", password);
+        return baseMapper.selectOne(queryWrapper);
     }
 }

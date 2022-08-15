@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.myzhxy.mapper.AdminMapper;
 import com.example.myzhxy.pojo.Admin;
 import com.example.myzhxy.pojo.LoginForm;
-import com.example.myzhxy.pojo.Teacher;
 import com.example.myzhxy.service.AdminService;
 import com.example.myzhxy.util.MD5;
 import org.springframework.stereotype.Service;
@@ -41,5 +40,13 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         }
         queryWrapper.orderByDesc("id");
         return baseMapper.selectPage(page, queryWrapper);
+    }
+
+    @Override
+    public Admin verifyPassword(Long userId, String password) {
+        QueryWrapper<Admin> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", userId.intValue());
+        queryWrapper.eq("password", password);
+        return baseMapper.selectOne(queryWrapper);
     }
 }

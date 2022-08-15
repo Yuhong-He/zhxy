@@ -12,4 +12,6 @@ public interface AdminService extends IService<Admin> {
     Admin getAdminById(Long userId);
 
     IPage<Admin> getAdminByOpr(Page<Admin> page, Admin admin);
+
+    Admin verifyPassword(Long userId, String oldPwd);
 }

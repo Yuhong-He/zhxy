@@ -7,10 +7,7 @@ import com.example.myzhxy.pojo.Teacher;
 import com.example.myzhxy.service.AdminService;
 import com.example.myzhxy.service.StudentService;
 import com.example.myzhxy.service.TeacherService;
-import com.example.myzhxy.util.CreateVerifiCodeImage;
-import com.example.myzhxy.util.JwtHelper;
-import com.example.myzhxy.util.Result;
-import com.example.myzhxy.util.ResultCodeEnum;
+import com.example.myzhxy.util.*;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -177,5 +174,56 @@ public class SystemController {
         String path = "upload/".concat(newFileName);
 
         return Result.ok(path);
+    }
+
+    @ApiOperation("Reset admin password")
+    @PostMapping("/updatePwd/{oldPwd}/{newPwd}")
+    public Result<Object> updatePwd(
+            @ApiParam("user token") @RequestHeader("token") String token,
+            @ApiParam("old password") @PathVariable("oldPwd") String oldPwd,
+            @ApiParam("new password") @PathVariable("newPwd") String newPwd
+    ) {
+        boolean expiration = JwtHelper.isExpiration(token);
+        if(expiration){
+            Result.fail().message("Token has expired, please login again");
+        }
+        Long userId = JwtHelper.getUserId(token);
+        Integer userType = JwtHelper.getUserType(token);
+        oldPwd = MD5.encrypt(oldPwd);
+        newPwd = MD5.encrypt(newPwd);
+        if(userType != null) {
+            switch (userType) {
+                case 1:
+                    Admin admin = adminService.verifyPassword(userId, oldPwd);
+                    if(admin != null){
+                        admin.setPassword(newPwd);
+                        adminService.saveOrUpdate(admin);
+                    } else {
+                        return Result.fail().message("Origin password incorrect");
+                    }
+                    break;
+                case 2:
+                    Student student = studentService.verifyPassword(userId, oldPwd);
+                    if(student != null){
+                        student.setPassword(newPwd);
+                        studentService.saveOrUpdate(student);
+                    } else {
+                        return Result.fail().message("Origin password incorrect");
+                    }
+                    break;
+                case 3:
+                    Teacher teacher = teacherService.verifyPassword(userId, oldPwd);
+                    if(teacher != null){
+                        teacher.setPassword(newPwd);
+                        teacherService.saveOrUpdate(teacher);
+                    } else {
+                        return Result.fail().message("Origin password incorrect");
+                    }
+                    break;
+            }
+        } else {
+            return Result.fail().message("Unexpected error: userType is null");
+        }
+        return Result.ok();
     }
 }

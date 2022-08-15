@@ -46,4 +46,12 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         queryWrapper.orderByDesc("id");
         return baseMapper.selectPage(page, queryWrapper);
     }
+
+    @Override
+    public Teacher verifyPassword(Long userId, String password) {
+        QueryWrapper<Teacher> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", userId.intValue());
+        queryWrapper.eq("password", password);
+        return baseMapper.selectOne(queryWrapper);
+    }
 }
