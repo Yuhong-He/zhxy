@@ -11,10 +11,10 @@ This repo is the tutorial project of [Java毕设项目：智慧校园](https://w
 * The web server is the Tomcat embedded in Springboot
 
 ## Demo
-![alt Home Page](https://github.com/Theodore-Ho/zhxy/blob/main/src/test/resources/Screenshot 2022-08-15 at 21.52.36.png)
-![alt Student Manege](https://github.com/Theodore-Ho/zhxy/blob/main/src/test/resources/Screenshot 2022-08-15 at 21.53.15.png)
-![alt Teacher Manege](https://github.com/Theodore-Ho/zhxy/blob/main/src/test/resources/Screenshot 2022-08-15 at 21.53.48.png)
-![alt Class Manege](https://github.com/Theodore-Ho/zhxy/blob/main/src/test/resources/Screenshot 2022-08-15 at 21.54.01.png)
-![alt Grade Manege](https://github.com/Theodore-Ho/zhxy/blob/main/src/test/resources/Screenshot 2022-08-15 at 21.54.10.png)
-![alt Admin Manege](https://github.com/Theodore-Ho/zhxy/blob/main/src/test/resources/Screenshot 2022-08-15 at 21.54.23.png)
-![alt Personal Info Edit](https://github.com/Theodore-Ho/zhxy/blob/main/src/test/resources/Screenshot 2022-08-15 at 21.54.33.png)
+![alt Home Page](https://github.com/Theodore-Ho/zhxy/blob/main/src/test/resources/Screenshot_2022-08-15_at_21.52.36.png)
+![alt Student Manege](https://github.com/Theodore-Ho/zhxy/blob/main/src/test/resources/Screenshot_2022-08-15_at_21.53.15.png)
+![alt Teacher Manege](https://github.com/Theodore-Ho/zhxy/blob/main/src/test/resources/Screenshot_2022-08-15_at_21.53.48.png)
+![alt Class Manege](https://github.com/Theodore-Ho/zhxy/blob/main/src/test/resources/Screenshot_2022-08-15_at_21.54.01.png)
+![alt Grade Manege](https://github.com/Theodore-Ho/zhxy/blob/main/src/test/resources/Screenshot_2022-08-15_at_21.54.10.png)
+![alt Admin Manege](https://github.com/Theodore-Ho/zhxy/blob/main/src/test/resources/Screenshot_2022-08-15_at_21.54.23.png)
+![alt Personal Info Edit](https://github.com/Theodore-Ho/zhxy/blob/main/src/test/resources/Screenshot_2022-08-15_at_21.54.33.png)
