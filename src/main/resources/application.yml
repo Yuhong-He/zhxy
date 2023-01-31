@@ -7,9 +7,9 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:8889/zhxy_db
+    url: jdbc:mysql://localhost:3306/zhxy_db
     username: root
-    password: 1234567890
+    password:
     hikari:
       connection-test-query: SELECT 1
       connection-timeout: 60000
